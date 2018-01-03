@@ -1,0 +1,25 @@
+form {
+	@include form($padding);
+	input {
+		display: block;
+		margin: 0 auto;
+		height: 2rem;
+		background-color: #ddd;
+		border: none;
+		padding: 2px;
+		text-align: center;
+	}
+	&#login-form {
+		width: 40%;
+		margin:  100px auto;
+		button {
+			float: right;
+			margin: $margin;
+		}
+	}
+	button {
+		position: relative;
+		display: block;
+		right: 0;
+	}
+}

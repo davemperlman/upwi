@@ -1,0 +1,37 @@
+@import "colors";
+
+@mixin border-radius($radius) {
+	-webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin button($color) {
+	width: 75px;
+	height: 30px;
+	background: linear-gradient(to bottom lighten($color, 60%), $color, darken($color, 100%));
+	background-color: lighten($color,20%);
+}
+
+@mixin form($padding) {
+	padding: $padding;
+	border: $border;
+	overflow: hidden;
+	fieldset {
+		border: none;
+	}
+	input {
+		width: 100%;
+		height: 25px;
+		border: none;
+		border-radius: $border-radius * 2;
+	}
+	label {
+		font-size: $base-font-size * .85;
+		text-indent: 1rem;
+		display: block;
+		width: 100%;
+		margin: $margin;
+	}
+}

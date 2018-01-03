@@ -1,57 +1,79 @@
-<?php  
+<?php 
+    require_once '../autoload.php';
+    $existingInfo = Classes\SQL::get('SELECT * FROM WorkOrders WHERE id = :id', array('id' => $_POST['id']), 1);
+    $imgs = explode(',', $existingInfo['photoLink']);
+     ?>
+<form method="post" id="imgupload" action="parts/submit.php" name="multiple_upload_form" id="multiple_upload_form" enctype="multipart/form-data">
 
-?>
-
-<form method="post" id="imgupload" name="multiple_upload_form" id="multiple_upload_form" enctype="multipart/form-data" action="" runat="server">
     <h3>Complete Job</h3>
+
     <a class="close" href="#">Back</a>
-    <fieldset>
-        <label id="imgUploadLabel">
+
+
+    <fieldset id="imagefield">
+
+        <input type="hidden" name="WOid" value="<?php echo $_POST['id']; ?>">
+
+        <label class="imgUploadLabel">
             Choose Images
-            <input type="file" name="images[]" id="images" multiple onchange="readURL(this);" >
+            <input type="file" name="images[]" class="imginput" multiple>
         </label>
+
         <div class="images_preview">
+            
+            <?php foreach ($imgs as $img): ?>
+                
+                <img src="<?php echo $img; ?>" class="thumbnail" alt="">
+
+            <?php endforeach ?>
 
         </div>
+
     </fieldset>
+
+
     <fieldset>
+
         <label>
             Work Completed
-            <textarea rows="5"></textarea>
+            <textarea id="work" name="work" rows="5">
+                <?php echo "$existingInfo[description]"; ?>
+            </textarea>
+
         </label>
+
         <label>
             Inventory Used
-            <input type="text">
+            <input id="inventory" name="inventory" value="<?php echo $existingInfo['inventoryUsed']; ?>" type="text">
         </label>
+
+        <label>
+            Hours Worked
+            <input type="number" name="hours" value="<?php echo $existingInfo['hoursWorked']; ?>" minlength="0" step='.25'>
+        </label>
+
     </fieldset>
-    <button>Submit</button>
+
+
+    <button type="submit" id="completeWorkOrder">Submit</button>
+
 </form>
 
-<script>
+<script>      
+    $('.close').on('click', function(e){
+        e.preventDefault();
+        $('.offscreen-window').removeClass('slide-in');
+        $('.offscreen-window').empty();
+    });
 
-        function readURL(input) {
-
-                $('.images_preview').empty();
-                $.each(input.files, function(index, val) {
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        $('.images_preview').append("<img class='thumbnail' src='" + e.target.result + "'>");
-                    }
-
-                reader.readAsDataURL(input.files[index]);
-                });
+    $('.imginput').on('change', function(){
+        $('.images_preview').empty();
+        for (var i = 0; i < $(this).length; i++) {
+            var fr = new FileReader();
+            fr.onload = function(e) {
+                $('.images_preview').append("<img class='thumbnail' src='" + e.target.result + "'>");
             }
-
-            $('.thumbnail').on('click', function(){
-            	var fileArr = $('#input')[0].files;
-            	var index   = $(this).index();
-            	console.log('clicky');
-
-            });
-
-            $('.close').on('click', function(e){
-                e.preventDefault();
-                $('.completeOrder').removeClass('slide-in');
-            });
+            fr.readAsDataURL(this.files[i]);
+        }
+    })
 </script>

@@ -2,7 +2,7 @@
 	require_once '../autoload.php';
 	session_start();
 	$date = $_GET['date'];
-	$jobs = Classes\SQL::get("SELECT * FROM WorkOrders INNER JOIN Jobs ON Jobs.id = job_id WHERE date = '$date' AND complete = 0");
+	$jobs = Classes\SQL::get("SELECT * FROM WorkOrders INNER JOIN Jobs ON Jobs.id = job_id WHERE date = :date AND complete = :complete", array('date' => $date, 'complete' => 0));
 ?>
 
 <?php foreach ($jobs as $job): ?>
@@ -35,9 +35,14 @@
 <?php endforeach ?>
 
 <script>
+	$('.workorder').on('click', function(){
+		$(this).toggleClass('drop');
+		$(this).next('.expandable').slideToggle(500);
+	})
 	// Slides in and populates form for completing job
 	$('.finish-workorder').on('click', function(){
-		$.post( 'parts/complete-workorder-form.php', function(data){
+		var WOid = '<?php echo $job['id']; ?>';
+		$.post( 'parts/complete-workorder-form.php', {id: WOid}, function(data){
 			$('.offscreen-window').append(data);
 		})
 		$('.offscreen-window').addClass('slide-in');

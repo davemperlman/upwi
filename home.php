@@ -3,16 +3,16 @@
 	Classes\Navigator::onLoad();
 ?>
 <link rel="stylesheet" href="_css/calendar.css"> <!-- TEMPORARY -->
-<h1>Welcome home</h1>
 <section id="calendar">
 	<?php
 		$cal = new Classes\Calendar();
 		echo $cal->show(); // Needs CSS in header
 	?>
-</section>
-<section id="todays-jobs">
+	<section id="todays-jobs">
 	Todays
+	</section>
 </section>
+
 <section class="offscreen-window">
 	
 </section>

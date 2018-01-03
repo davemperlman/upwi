@@ -24,7 +24,7 @@
 			{
 
 				// Require Header File
-				require_once '/Library/WebServer/Documents/clients/upwi/parts/header.php';
+				require_once 'parts/header.php';
 				return;
 
 			}else{
@@ -36,7 +36,7 @@
 				}else{
 
 					// Require Header File
-					require_once '/Library/WebServer/Documents/clients/upwi/parts/header.php';
+					require_once 'parts/header.php';
 					return;
 
 				}
@@ -46,7 +46,7 @@
 		}
 
 		public static function get_footer() {
-			require_once '/Library/WebServer/Documents/clients/upwi/parts/footer.php';
+			require_once 'parts/footer.php';
 			return;
 		}
 		

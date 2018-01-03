@@ -1,0 +1,9 @@
+
+
+button {
+	@include border-radius($border-radius);
+	@include button(map-get($buttons, submit));
+	border: none;
+	color: map-get($buttons, font);
+	cursor: pointer;
+}

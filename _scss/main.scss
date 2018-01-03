@@ -1,0 +1,155 @@
+//-- Modules and Variales --//
+@import "partials/base";
+
+//-- Partials --//
+@import "partials/buttons";
+@import "partials/forms";
+@import "partials/header";
+
+//-- Gave up on Modules --//
+
+body {
+	height: 768px;
+	overflow: hidden;
+}
+section#calendar {
+	width: 100%;
+	background-color: #effeef;
+	padding: 2rem 0;
+	position: relative;
+	overflow: hidden;
+}
+div#calendar {
+	float: left;
+	position: relative;
+	margin-left: 2rem;
+	left: 2rem;
+	ul.dates li.active {
+		background-color: #fff;
+	}
+}
+
+#todays-jobs {
+	float: right;
+	width: 358px;
+	.workorder {
+		width: 100%;
+		text-align: left;
+		position: relative;
+
+		&::after {
+			content: '>';
+			position: absolute;
+			right: 1rem;
+			top: 0;
+			transition: all .5s;
+		}
+		&.drop::after {
+			transform: rotate(90deg);
+		}
+	}
+	.expandable {
+		display: none;
+		height: auto;
+		//background-color: rgba(0,0,0,.5);
+		.finish-workorder {
+			float: right;
+			margin:2rem;
+			position: relative;
+			right: 2rem;
+		}
+		ul {
+			list-style: none;
+			padding: 0;
+			width: 80%;
+			margin: .5rem auto;
+			li {
+				float: left;
+			}
+		}
+	}
+}
+.offscreen-window {
+	h3 {
+		display: block;
+		text-align: center;
+		width: 100%;
+	}
+	position: absolute;
+	width: 0%;
+	height: 768px;
+	top: 0;
+	right: 0;
+	overflow: hidden;
+	background-color: rgba(255,255,255,.99);
+	transition: width .5s;
+	&.slide-in {
+		width: 100%;
+	}
+	#imgupload {
+		width: 80%;
+		height: 60%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
+		fieldset {
+			// border: none;
+			// width: 50%;
+			// margin: 0 auto;
+			// margin-right: 0;
+			label textarea {
+				background: #ddd;
+				width: 100%;
+				display: block;
+				border: none;
+				border-radius: $border-radius;
+			}
+			label {
+				float: left;
+				width: 32%;
+
+			}
+		}
+		#imagefield {
+			width: 460.797px;
+			margin: 0 auto;
+			height: 30%;
+			overflow: hidden;
+			#imgupload {
+				width: auto;
+				display: block;
+			}
+			.images_preview {
+				height: 111.83px;
+				width: 70%;
+
+				overflow: scroll;
+				background-color: rgba(0,0,0,.5);
+				padding: .5rem 0;
+				white-space: nowrap;
+				.thumbnail {
+					display: inline-block;
+					height: 70%;
+
+				}
+			}
+		}
+	}
+}
+.close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 3rem;
+	height: 2rem;
+	background-color: #ddd;
+	line-height: 2rem;
+	text-align: center;
+}
+footer {
+	background-color: #000;
+	width: 100%;
+}

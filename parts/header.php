@@ -1,13 +1,14 @@
 <?php 
 	if ($_SESSION) {
-		$me = Classes\SQL::get("SELECT * FROM Employees WHERE id = '$_SESSION[id]'", 1);
+		$me = Classes\SQL::get("SELECT * FROM Employees WHERE id = :id", array('id' => $_SESSION['id']), 1);
 	}
 ?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<title></title>
-		<script src="/clients/upwi/_js/jQuery.js"></script>
+		<script src="_js/jQuery.js"></script>
+		<link rel="stylesheet" href="_css/main.css">
 	</head>
 	<body>
 		<header>

@@ -17,21 +17,31 @@
 		}
 
 		// Retrieves information from the database with an option to return only a single row.
-		public static function get($query, $single = null)
+		public static function get($query, $bindings, $single = null)
 		{
 			if ( isset($single) ) 
 			{
-				$result = self::connect()->query($query)->fetch(PDO::FETCH_ASSOC);
+				$stmt = self::connect()->prepare($query);
+				$stmt->execute($bindings);
+				$result = $stmt->fetch(PDO::FETCH_ASSOC);
 				return $result;
 			}else{
-				$result = self::connect()->query($query)->fetchAll(PDO::FETCH_ASSOC);
+				$stmt = self::connect()->prepare($query);
+				$stmt->execute($bindings);
+				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				return $result;
 			}
 		}
 
+		public static function set($query, $bindings)
+		{
+			$stmt = self::connect()->prepare($query);
+			$stmt->execute($bindings);
+		}
+
 		// Validates user credentials.
 		public static function validate($username, $password) {
-			$result = self::get("SELECT id FROM Employees WHERE username = '$username' AND password = '$password'", 1);
+			$result = self::get("SELECT id FROM Employees WHERE username = :username AND password = :password", array('username' => $username, 'password' => $password), 1);
 			return $result;
 		}
 		
